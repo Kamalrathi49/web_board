@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      font-family: arial;
+    }
+    .caption {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 25px;
+      text-align: center;
+    }
+    .tr {
+      display: flex;
+    }
+    .td {
+      width: 20%;
+      border: 1px solid #777;
+      padding: 10px;
+    }
+    .th {
+      display: flex;
+      background: mediumblue;
+      color: white;
+    }
+    .tr:nth-of-type(even) {
+      background: #efefef;
+    }
+
+    @media (max-width: 600px), (max-device-width: 600px) {
+      .th {
+        display: none;
+      }
+      .tr {
+        display: block;
+        margin-bottom: 25px;
+        background: transparent !important;
+      }
+      .td {
+        background: #f0f0f0;
+        display: flex;
+        width: 90%;
+        margin: auto;
+      }
+      .td:before {
+        font-weight: bold;
+        display: block;
+        width: 50%;
+      }
+      .td:nth-of-type(1) {
+        background: mediumblue;
+        color: white;
+        font-weight: bold;
+      }
+      .td:nth-of-type(1):before {
+        content: "Name:";
+      }
+      .td:nth-of-type(2):before {
+        content: "DoB:";
+      }
+      .td:nth-of-type(3):before {
+        content: "Specialization:";
+      }
+      .td:nth-of-type(4):before {
+        content: "Blood Group:";
+      }
+      .td:nth-of-type(5):before {
+        content: "Contact Number:";
+      }
+    }
+
+    @media (max-device-width: 600px) {
+      .table {
+        font-size: 2rem;
+      }
+      .td {
+        padding: 20px;
+      }
+    }
+  </style>
+  <body>
+    <div class="caption">Employee Details</div>
+    <div class="table">
+      <div class="th">
+        <div class="td">Topic</div>
+        <div class="td">Starter</div>
+        <div class="td">Last Updated</div>
+      </div>
+      <div class="tbody">
+        {% for topic in topics %}
+        <div class="tr">
+          <div class="td">{{topic.subject}}</div>
+          <div class="td">{{topic.user}}</div>
+          <div class="td">{{topic.updated_at}}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

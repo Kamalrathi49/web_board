@@ -8,7 +8,8 @@ from django.db.models.fields import CharField
 
 class Board(models.Model):
     name = models.CharField(max_length=99, unique=True)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, null=True, blank=True)
+    
 
     def __str__(self):
         return self.name

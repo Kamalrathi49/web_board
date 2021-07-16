@@ -1,21 +1,41 @@
-{%load static %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body style="text-align: center;background-color: aquamarine;">
-    {% if username %}
-    <h1>user : {{username}}</h1>
-    {% else %}
-    <p>no user</p>
-    {% endif %}
-    <h1>page : {{page}}</h1>
-    {% for item in board %}
-      <h1>{{item.name}}</h1>
-    {% endfor %}
-</body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">Boards</li>
+      </ol>
+      <table class="table">
+        <thead class="thead-inverse bg-dark text-light">
+          <tr>
+            <th>Board</th>
+            <th>Posts</th>
+            <th>Topics</th>
+            <th>Last Post</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for board in boards %}
+            <tr>
+              <td>
+                <a href="boards/topic">
+                  {{ board.name }}
+                </a>
+                <small class="text-muted d-block">{{ board.description }}</small>
+              </td>
+              <td class="align-middle">0</td>
+              <td class="align-middle">0</td>
+              <td></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
