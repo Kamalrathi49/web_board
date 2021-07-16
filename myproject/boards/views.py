@@ -5,12 +5,12 @@ from .models import *
 # Create your views here.
 
 def home(request):
-    boards = Board.objects.all()
-    ctx = {'boards':boards}
+    board_list = Board.objects.all()
+    ctx = {'boards':board_list}
     return render(request, 'home.html',ctx)
 
-def topic(request):
-    topics = Topic.objects.all()
-    ctx = {'topics': topics}
+def topic(request, board_name):
+    topic_list = Topic.objects.filter(board__name = board_name)
+    ctx = {'topics': topic_list}
     return render(request, 'topic.html', ctx)
     

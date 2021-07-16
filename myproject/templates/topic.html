@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Topic</title>
   </head>
   <style>
     body {
@@ -20,7 +21,7 @@
       display: flex;
     }
     .td {
-      width: 20%;
+      width: 30%;
       border: 1px solid #777;
       padding: 10px;
     }
@@ -91,15 +92,21 @@
         <div class="td">Topic</div>
         <div class="td">Starter</div>
         <div class="td">Last Updated</div>
+        <div class="td">Board</div>
       </div>
       <div class="tbody">
+        {% if topics %}
         {% for topic in topics %}
         <div class="tr">
           <div class="td">{{topic.subject}}</div>
-          <div class="td">{{topic.user}}</div>
-          <div class="td">{{topic.updated_at}}</div>
+          <div class="td">{{topic.starter | upper}}</div>
+          <div class="td">{{topic.created_at}}</div>
+          <div class="td">{{topic.board | upper}}</div>
         </div>
         {% endfor %}
+        {% else %}
+        <h3 class="caption">No data found<h3>
+        {% endif %}
       </div>
     </div>
   </body>

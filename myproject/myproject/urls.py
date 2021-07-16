@@ -20,7 +20,7 @@ from django.urls.conf import include
 from boards import views
 
 urlpatterns = [
-    path('boards/', include('boards.urls')),
+    path('', include('boards.urls')),
     path('admin/', admin.site.urls),
 
 ]
