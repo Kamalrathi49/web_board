@@ -7,7 +7,7 @@ from boards import views
 app_name = 'boards'
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^@board-(?P<board_name>[\w\-\ ]+)-----/$', views.topic, name='topic-list'),
+    url(r'^(?P<board_name>[\w\-\ ]+)/$', views.topic, name='topic-list'),
 ]
 
 

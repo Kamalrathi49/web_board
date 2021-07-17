@@ -1,5 +1,5 @@
-from boards.models import Board
-
+from boards.models import Board, Topic
+from django.contrib.auth.models import User
 
 board_list = [{
   "name": "Mitsubishi",
@@ -17,6 +17,7 @@ board_list = [{
   "name": "Dodge",
   "description": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque."
 }]
+
 
 for item in board_list:
     board = Board.objects.create(

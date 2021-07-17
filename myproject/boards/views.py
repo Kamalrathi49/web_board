@@ -11,6 +11,7 @@ def home(request):
 
 def topic(request, board_name):
     topic_list = Topic.objects.filter(board__name = board_name)
+    # board = Board.objects.get(name = board_name)
     ctx = {'topics': topic_list}
     return render(request, 'topic.html', ctx)
     

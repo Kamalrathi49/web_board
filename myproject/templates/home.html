@@ -1,37 +1,34 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block breadcrumb %}
+<li class="breadcrumb-item active">Boards</li>
+{% endblock %} {% block content %}
 
-{% block title%} Home {% endblock%}
+<table class="table">
+  <thead class="thead-inverse bg-info text-light">
+    <tr>
+      <th>Board</th>
+      <th>Posts</th>
+      <th>Topics</th>
+      <th>Last Post</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for board in boards %}
+    <tr>
+      <td>
+        <a
+          class="text-decoration-none"
+          href="{% url 'boards:topic-list' board.name %}">
+          {{ board.name | upper }}
+        </a>
+        <small class="text-muted d-block"
+          >{{ board.description | truncatechars:60 }}</small>
+      </td>
+      <td class="align-middle">0</td>
+      <td class="align-middle">0</td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-{% block body %}
-{% include 'alert.html' %}
-<div class="container">
-      <ol class="breadcrumb my-4">
-        <li class="breadcrumb-item active">Boards</li>
-      </ol>
-      <table class="table">
-        <thead class="thead-inverse bg-dark text-light">
-          <tr>
-            <th>Board</th>
-            <th>Posts</th>
-            <th>Topics</th>
-            <th>Last Post</th>  
-          </tr>
-        </thead>
-        <tbody>
-          {% for board in boards %}
-            <tr>
-              <td>
-                <a  href="{% url 'boards:topic-list' board.name %}" >
-                  {{ board.name | upper }}
-                </a>
-                <small class="text-muted d-block">{{ board.description | truncatechars:60 }}</small>
-              </td>
-              <td class="align-middle">0</td>
-              <td class="align-middle">0</td>
-              <td></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
 {% endblock %}

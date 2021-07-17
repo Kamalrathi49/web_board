@@ -65,6 +65,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        # setting for custom template tags
+        'libraries':{
+            'custom_tags': 'boards.templatetags.custom_tags',
+            
+        }
         },
     },
 ]
