@@ -14,6 +14,8 @@ class Topic(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='topics')
     starter = models.ForeignKey(User, on_delete= models.CASCADE, related_name='topics')
+    topic_message = models.TextField(max_length=250)
+
 
     def __str__(self):
         return self.subject

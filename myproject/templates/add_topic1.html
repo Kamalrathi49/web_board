@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block title %}
+  {{ request.path | remove_slash }} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.subject }}
+    </div>
+    <div class="mb-3">
+      {{ form.message }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% load custom_tags %}
+<ol class="breadcrumb my-4">
+    <li class="breadcrumb-item">
+        <a href="{% url 'boards:home' %}">Boards</a>
+    </li>
+    {% if 'add' in request.path %}
+        <li class="breadcrumb-item active">
+            <a href="{% url 'boards:topic-list' request.path|remove_slash  %}">
+                {{ request.path| remove_slash }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">add</li>
+    {% else %}
+        <li class="breadcrumb-item active">{{ request.path| remove_slash }}</li>
+    {% endif %}
+</ol>

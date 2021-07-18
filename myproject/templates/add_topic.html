@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block title %}
+  {{ request.path | remove_slash }} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<form method="POST"  action="{% url 'boards:submit-form' request.path|remove_slash %}">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputText1" class="form-label">Subject</label>
+    <input type="text" class="form-control" name="subject" id="exampleInputText1" aria-describedby="textHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputText2" class="form-label">Message</label>
+    <textarea class="form-control" id="exampleInputText1" name="message" id="" cols="30" rows="10"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
