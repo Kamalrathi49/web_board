@@ -1,5 +1,24 @@
 <nav class="navbar navbar-light bg-info text-light p-2">
-    <div class="container-fluid">
+    <div class="container">
       <a class="navbar-brand text-light" href="{% url 'boards:home'%}">Web Board</a>
+    <div>
+    {% if  user.is_authenticated %}
+    <div class="btn-group">
+      <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" data-bs-auto-close="inside" aria-expanded="false">
+        {{ request.user}}
+      </button>
+      <ul class="dropdown-menu btn-sm" aria-labelledby="dropdownMenuClickableOutside">
+        <li><a class="dropdown-item" href="#">Menu item</a></li>
+        <li><a class="dropdown-item" href="#">Menu item</a></li>
+        <li><a class="dropdown-item" href="#">Menu item</a></li>
+      </ul>
+    </div>
+      {% else%}
+      <btn class="btn bg-info btn-sm">log in</btn>
+      <a href="{% url 'accounts:sign-up' %}">
+        <btn class="btn bg-info btn-sm">sign up</btn>
+      </a>
+    {% endif%}
+      </div>
     </div>
   </nav>

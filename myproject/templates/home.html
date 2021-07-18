@@ -1,7 +1,9 @@
-{% extends 'base.html' %} {% block breadcrumb %}
-<li class="breadcrumb-item active">Boards</li>
-{% endblock %} {% block content %}
+{% extends 'base.html' %} 
+{% block header %}
+      {% include 'header.html' %}
+{% endblock %}
 
+{% block content %}
 <table class="table">
   <thead class="thead-inverse bg-info text-light">
     <tr>
