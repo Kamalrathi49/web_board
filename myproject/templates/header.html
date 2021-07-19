@@ -1,24 +1,26 @@
 <nav class="navbar navbar-light bg-info text-light p-2">
     <div class="container">
-      <a class="navbar-brand text-light" href="{% url 'boards:home'%}">Web Board</a>
+      <a class="navbar-brand text-light" href="{% url 'boards:home'%}" style="font-family: papyrus;  font-weight: bolder; font-size: 1.5rem;">Web Board</a>
     <div>
     {% if  user.is_authenticated %}
     <div class="btn-group">
       <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" data-bs-auto-close="inside" aria-expanded="false">
-        {{ request.user}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-person-fill " viewBox="0 0 16 10" style="padding-top: 0%;">
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        </svg>{{ request.user|upper}}
       </button>
-      <ul class="dropdown-menu btn-sm" aria-labelledby="dropdownMenuClickableOutside">
+      <ul class="dropdown-menu btn-sm text-center" aria-labelledby="dropdownMenuClickableOutside">
         <li><a class="dropdown-item" href="#">Menu item</a></li>
-        <li><a class="dropdown-item" href="#">Menu item</a></li><hr>
-        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Log Out</a></li>
+        <li><a class="dropdown-item" href="#">Menu item</a></li>
+        <li><a class="dropdown-item bg-secondary text-light " href="{% url 'accounts:logout' %}">Log Out</a></li>
       </ul>
     </div>
       {% else%}
       <a href="{% url 'accounts:log-in' %}">
-        <btn class="btn bg-info btn-sm text-decoration-none text-light">log in</btn>
+        <btn class="btn bg-secondary btn-sm pl-3 pr-3 text-decoration-none text-light">Log In</btn>
       </a>
       <a href="{% url 'accounts:sign-up' %}">
-        <btn class="btn bg-info btn-sm text-decoration-none text-light">sign up</btn>
+        <btn class="btn bg-primary btn-sm pl-3 pr-3 text-decoration-none text-light">Sign Up</btn>
       </a>
     {% endif%}
       </div>

@@ -2,14 +2,17 @@
 {% load custom_tags %}
 
 {% block title %}
-  Log in  - {{ block.super }}
+  Log in
 {% endblock %}
 
 {% block content %}
- <div class="container  m-5">
+ <div class="container m-5 ">
     <h3 class="text-center mb-5">Log In</h3>
-     <div class="w-50 mx-auto">
+     <div class="w-50 mx-auto border rounded border-info pt-5 pr-5 pl-5 pb-4">
+       <input type="hidden" name="next" value="{{ next }}">
          {%include 'includes/forms.html' %}
-     </div>
+         <p class="mt-5 mb-1" >New to Web Board? <a href="{% url 'accounts:sign-up'%}">Sign Up</a></p> 
+        </div>
  </div>
+ 
 {% endblock %}

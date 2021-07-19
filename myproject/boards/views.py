@@ -5,6 +5,7 @@ from .forms import *
 from .models import *
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -36,6 +37,7 @@ def submit_form1(request, board_name):
         messages.error(request, f'something went') 
         return redirect(f'/{board_name}/add')
 
+@login_required
 def submit_form(request, board_name):
     if request.method == 'POST':
         form = TopicForm(request.POST)
@@ -44,6 +46,11 @@ def submit_form(request, board_name):
             topic.board = Board.objects.get(name=board_name)
             topic.starter = request.user
             topic.save()
+            Post.objects.create(
+                post_message=form.cleaned_data.get('message'),
+                topic=topic,
+                created_by=request.user
+            )
             messages.success(request, f'{topic.subject} topic  created successfully!') 
             return redirect(f'/{board_name}')
         else :
@@ -54,3 +61,7 @@ def submit_form(request, board_name):
         ctx = {'form':form}
         return render( request, 'add_topic1.html', ctx)
         
+def topic_post(request, board_name, topic_name):
+    topic = Topic.objects.get(board__name=board_name, topic__name=topic_name)
+    ctx = {'topic': topic}
+    return render(request, 'topic_posts.html', ctx )

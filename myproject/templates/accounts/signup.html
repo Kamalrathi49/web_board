@@ -2,14 +2,16 @@
 {% load custom_tags %}
 
 {% block title %}
-  Sign up  - {{ block.super }}
+  Sign up 
 {% endblock %}
 
 {% block content %}
  <div class="container  m-5">
    <h3 class="text-center mb-5">Sign Up</h3>
-     <div class="w-50 mx-auto">
+     <div class="w-50 mx-auto  border border-info p-5 rounded">
          {%include 'includes/forms.html' %}
+      <p class="mt-5 mb-1" >Already have an account? <a href="/accounts/login/">Sign In</a></p> 
+
      </div>
  </div>
 {% endblock %}

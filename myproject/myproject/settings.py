@@ -146,6 +146,6 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-
 LOGIN_REDIRECT_URL = 'boards:home'
 LOGOUT_REDIRECT_URL = 'boards:home'
+
