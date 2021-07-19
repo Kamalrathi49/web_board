@@ -9,14 +9,16 @@
       </button>
       <ul class="dropdown-menu btn-sm" aria-labelledby="dropdownMenuClickableOutside">
         <li><a class="dropdown-item" href="#">Menu item</a></li>
-        <li><a class="dropdown-item" href="#">Menu item</a></li>
-        <li><a class="dropdown-item" href="#">Menu item</a></li>
+        <li><a class="dropdown-item" href="#">Menu item</a></li><hr>
+        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Log Out</a></li>
       </ul>
     </div>
       {% else%}
-      <btn class="btn bg-info btn-sm">log in</btn>
+      <a href="{% url 'accounts:log-in' %}">
+        <btn class="btn bg-info btn-sm text-decoration-none text-light">log in</btn>
+      </a>
       <a href="{% url 'accounts:sign-up' %}">
-        <btn class="btn bg-info btn-sm">sign up</btn>
+        <btn class="btn bg-info btn-sm text-decoration-none text-light">sign up</btn>
       </a>
     {% endif%}
       </div>

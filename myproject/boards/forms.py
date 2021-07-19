@@ -13,7 +13,6 @@ class TopicForm(forms.ModelForm):
             self.fields['subject'].widget.attrs['placeholder'] = 'Subject'
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = Post
         fields = ('post_message', )

@@ -53,3 +53,4 @@ def submit_form(request, board_name):
         form = TopicForm()
         ctx = {'form':form}
         return render( request, 'add_topic1.html', ctx)
+        
