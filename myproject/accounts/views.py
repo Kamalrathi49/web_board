@@ -16,11 +16,11 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            messages.success(request, f'thankyou for signup {request.user}')
+            messages.success(request, f'Welcome to Web Board {request.user}!')
             return redirect('/')
         else :
             messages.error(request, f'something went wrong')
-            return redirect(request.META.HTTP_REFERER)
+            return redirect('/')
     else:
         form = RegisterForm()
         ctx = {'form' : form}
@@ -29,11 +29,11 @@ def signup(request):
 
 def log_out(request):
     logout(request)
-    messages.success(request,'you are succefully logout')
+    messages.success(request,'You have logout sucessfully!')
     return redirect('/')
 
 from django.contrib.auth import authenticate, login
-1
+
 
 def log_in(request):
     if request.method == 'POST':
@@ -47,7 +47,7 @@ def log_in(request):
                 messages.success(request,f'welcome back {username}')
                 return redirect('/')
             else:
-                messages.error(request,f'user not exist')
+                messages.error(request,f"user does't exist")
                 return redirect('log-in')
 
 

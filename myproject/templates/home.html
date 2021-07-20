@@ -25,9 +25,23 @@
         <small class="text-muted d-block"
           >{{ board.description | truncatechars:60 }}</small>
       </td>
-      <td class="align-middle">0</td>
-      <td class="align-middle">0</td>
-      <td></td>
+      <td class="align-middle">{{ board.get_posts_count }}</td>
+      <td class="align-middle">{{ board.topics.count }}</td>
+      <td class="align-middle">
+        {% with post=board.get_last_post %}
+  {% if post %}
+    <small>
+
+        By {{ post.created_by.username }} at {{ post.created_at }}
+
+    </small>
+  {% else %}
+    <small class="text-muted">
+      <em>No posts yet.</em>
+    </small>
+  {% endif %}
+{% endwith %}
+      </td>
     </tr>
     {% endfor %}
   </tbody>

@@ -15,5 +15,5 @@ class TopicForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('post_message', )
+        fields = ('message', )
  
