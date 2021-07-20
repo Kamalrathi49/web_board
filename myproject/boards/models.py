@@ -28,7 +28,7 @@ class Topic(models.Model):
 
 class Post(models.Model):
     message = models.TextField(max_length=250)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='post')
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='post_topic')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
     created_by = models.ForeignKey(User, on_delete= models.CASCADE, related_name='post')

@@ -61,7 +61,9 @@ def submit_form(request, board_name):
         ctx = {'form':form}
         return render( request, 'add_topic1.html', ctx)
         
-def post(request, topic_pk):
-    topic = Topic.objects.filter(pk=topic_pk)
+def post(request, board_name,  topic_subject, topic_pk):
+    topic = Topic.objects.get(pk=topic_pk)
     ctx = {'topic': topic}
     return render(request, 'topic_post.html', ctx )
+
+
