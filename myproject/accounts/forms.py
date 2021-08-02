@@ -3,33 +3,35 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import fields
+from django.forms.widgets import EmailInput, TextInput
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(label = "Email")
 
+    username = forms.CharField(widget=forms.TextInput(attrs={
+     'class': 'form-control', 'placeholder': 'Username'
+    }))
+    email = forms.CharField(widget=forms.EmailInput(attrs={
+     'class': 'form-control', 'placeholder': 'Email Address'
+    }))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'form-control',  'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'form-control', 'placeholder': 'Confirm Password'}))
     class Meta:
         model = User
         fields = ("username", "email", 'password1', 'password2' )
     
     def __init__(self, *args, **kwargs):
-        super(RegisterForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
-        self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['username'].widget.attrs['placeholder'] = 'Username'
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['placeholder'] = 'Email'
-        self.fields['password1'].widget.attrs['class'] = 'form-control'
-        self.fields['password1'].widget.attrs['placeholder'] = 'Password'
-        self.fields['password2'].widget.attrs['class'] = 'form-control'
-        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
+        # Call to ModelForm constructor
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        for fieldname in ['username', 'email', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=12)
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(max_length=99, widget=forms.TextInput(attrs={
+        'class': 'form-control',  'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'form-control',  'placeholder': 'Password'}))
     
-    def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
-        self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['username'].widget.attrs['placeholder'] = 'Username'
-        self.fields['password'].widget.attrs['class'] = 'form-control'
-        self.fields['password'].widget.attrs['placeholder'] = 'Password'
+    

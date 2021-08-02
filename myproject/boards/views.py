@@ -3,21 +3,26 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import *
 from .models import *
+from accounts.forms import *
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+loginform = LoginForm()
+signupform = RegisterForm()
+
+
 def home(request):
     board_list = Board.objects.all()
-    ctx = {'boards':board_list}
+    ctx = {'boards':board_list, 'login_form':loginform, 'signup_form': signupform}
     return render(request, 'home.html',ctx)
 
 def topic(request, board_name):
     topic_list = Topic.objects.filter(board__name = board_name).order_by('-created_at')
     # board = Board.objects.get(name = board_name)
-    ctx = {'topics': topic_list}
+    ctx = {'topics': topic_list, 'login_form':loginform, 'signup_form': signupform}
     return render(request, 'topic.html', ctx)
 
 def add_topic(request, board_name):
@@ -63,7 +68,7 @@ def submit_form(request, board_name):
         
 def post(request, board_name,  topic_subject, topic_pk):
     topic = Topic.objects.get(pk=topic_pk)
-    ctx = {'topic': topic}
+    ctx = {'topic': topic, 'login_form':loginform, 'signup_form': signupform}
     return render(request, 'topic_post.html', ctx )
 
 

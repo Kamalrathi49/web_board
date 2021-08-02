@@ -9,10 +9,16 @@
 
 
 {% block content %}
+
+{% if topic.0.starter.username == request.user %}
 <a href="{% url 'boards:add-topic' request.path|remove_slash %}">
-  <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-info mb-3 border-0">New Topic</button>
+  <button type="button" class="btn btn-info mb-3 ml-4 border-0">New Topic</button>
 </a>
-  <table class="table">
+{% else %}
+<button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">New Topic</button>
+{% endif %}
+
+  <table class="table ">
     <thead class="thead-inverse bg-info text-light">
       <tr>
         <th>Topic</th>

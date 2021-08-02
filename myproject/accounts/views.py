@@ -17,10 +17,10 @@ def signup(request):
             user = form.save()
             auth_login(request, user)
             messages.success(request, f'Welcome to Web Board {request.user}!')
-            return redirect('/')
+            return redirect(request.META.get('HTTP_REFERER'))
         else :
             messages.error(request, f'something went wrong')
-            return redirect('/')
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
         form = RegisterForm()
         ctx = {'form' : form}
@@ -45,15 +45,15 @@ def log_in(request):
             if user:
                 login(request, user)
                 messages.success(request,f'welcome back {username}')
-                return redirect('/')
+                return redirect(request.META.get('HTTP_REFERER'))
             else:
                 messages.error(request,f"user does't exist")
-                return redirect('log-in')
+                return redirect(request.META.get('HTTP_REFERER'))
 
 
         else :
             messages.error(request, f'something went wrong')
-            return redirect('/')
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
         form = LoginForm()
         ctx = {'form' : form}

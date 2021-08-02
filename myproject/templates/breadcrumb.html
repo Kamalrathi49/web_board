@@ -11,6 +11,6 @@
         </li>
         <li class="breadcrumb-item active">add</li>
     {% else %}
-        <li class="breadcrumb-item active">{{ request.path| remove_slash }}</li>
+        <li class="breadcrumb-item active">{{ request.path }}</li>
     {% endif %}
 </ol>

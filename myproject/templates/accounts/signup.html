@@ -1,17 +1,18 @@
-{% extends 'accounts/base.html' %}
-{% load custom_tags %}
-
-{% block title %}
-  Sign up 
-{% endblock %}
-
-{% block content %}
- <div class="container  m-5">
-   <h3 class="text-center mb-5">Sign Up</h3>
-     <div class="w-50 mx-auto  border border-info p-5 rounded">
-         {%include 'includes/forms.html' %}
-      <p class="mt-5 mb-1" >Already have an account? <a href="/accounts/login/">Sign In</a></p> 
-
-     </div>
- </div>
-{% endblock %}
+<!-- Modal -->
+<div class="modal fade " id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-c">
+                <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'accounts:sign-up' %}" method="post">
+                    {% csrf_token %} {{ signup_form.as_p }}
+                    <hr class="p-1">
+                    <button class="btn btn-primary" type="submit">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
