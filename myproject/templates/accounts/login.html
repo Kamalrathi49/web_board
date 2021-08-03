@@ -5,15 +5,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Log In</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></button>
             </div>
             <div class="modal-body">
                 <form  action="{% url 'accounts:log-in'%}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
                     {{ login_form.as_p }}
-                    <hr class="pt-1">
-                    <button type="submit" class="btn btn-primary">login</button>
+                    <!-- <hr class="pt-1"> -->
+                    <button type="submit" class="btn btn-primary">Log In</button>
                 </form>
+                <hr>
+                <p class="text-center">New to <strong>Django Board?</strong> <btn style="cursor: pointer;" type="button" class="text-primary text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal"
+                    data-bs-target="#signup" >Sign Up</btn></p>
             </div>
         </div>
     </div>

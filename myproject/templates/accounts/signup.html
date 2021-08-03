@@ -4,15 +4,17 @@
         <div class="modal-content">
             <div class="modal-header text-c">
                 <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></button>
             </div>
             <div class="modal-body">
                 <form action="{% url 'accounts:sign-up' %}" method="post">
                     {% csrf_token %} {{ signup_form.as_p }}
-                    <hr class="p-1">
                     <button class="btn btn-primary" type="submit">Create Account</button>
                 </form>
-            </div>
+                <hr>
+                <p class="text-center">Already have an account? <btn style="cursor: pointer;" type="button" class="text-primary text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal"
+                    data-bs-target="#login" >Log In</btn></p>            
+                </div>
         </div>
     </div>
 </div>
