@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load custom_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,9 +17,6 @@
     {% include 'accounts/signup.html' %}
       {% block alert%}
         {% include 'alert.html'%}
-      {% endblock %}
-      {% block breadcrumbs %}
-        {% include 'breadcrumb.html'%}
       {% endblock %}
       {% block content %}
     {% endblock %}

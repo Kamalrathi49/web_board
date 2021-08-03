@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
 {% block title %}
-  {{ request.path | remove_slash }} - {{ block.super }}
+  Posts - {{ block.super }}
 {% endblock %}
 {% block header %}
       {% include 'header.html' %}
@@ -10,6 +10,11 @@
 
 {% block content %}
 <div class="container">
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item"> <a href="{% url 'boards:home' %}"> Boards</a></li>
+    <li class="breadcrumb-item "> <a href="{% url 'boards:topic-list' topic.board %}">{{topic.board}}</a></li>
+    <li class="breadcrumb-item">Post</li>
+  </ol>
 <div class="mb-4">
   <a href="#" class="btn btn-info" role="button">Reply</a>
 </div>

@@ -21,8 +21,8 @@ def home(request):
 
 def topic(request, board_name):
     topic_list = Topic.objects.filter(board__name = board_name).order_by('-created_at')
-    # board = Board.objects.get(name = board_name)
-    ctx = {'topics': topic_list, 'login_form':loginform, 'signup_form': signupform}
+    topic_form = TopicForm()
+    ctx = {'topics': topic_list, 'login_form':loginform, 'signup_form': signupform, 'topic_form':topic_form}
     return render(request, 'topic.html', ctx)
 
 def add_topic(request, board_name):
@@ -44,6 +44,7 @@ def add_topic(request, board_name):
 
 @login_required
 def submit_form(request, board_name):
+    print('------------------------>>>>  worknig')
     if request.method == 'POST':
         form = TopicForm(request.POST)
         if form.is_valid :
@@ -57,14 +58,13 @@ def submit_form(request, board_name):
                 created_by=request.user
             )
             messages.success(request, f'Your topic "{topic.subject}" is added Successfully!') 
-            return redirect(f'/{board_name}')
+            return redirect(request.META.get('HTTP_REFERER'))
         else :
             messages.error(request, f'something went wrong') 
-            return redirect(f'/{board_name}/add')
+            return redirect(request.META.get('HTTP_REFERER'))
     else : 
-        form = TopicForm()
-        ctx = {'form':form}
-        return render( request, 'add_topic1.html', ctx)
+        messages.error(request, f'something went wrong') 
+        return redirect('/')
         
 def post(request, board_name,  topic_subject, topic_pk):
     topic = Topic.objects.get(pk=topic_pk)

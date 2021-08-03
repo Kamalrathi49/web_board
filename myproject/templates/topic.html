@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
 {% block title %}
-  {{ request.path | remove_slash }} - {{ block.super }}
+  {{ request.path|remove_slash }} - {{ block.super }}
 {% endblock %}
 {% block header %}
       {% include 'header.html' %}
@@ -10,15 +10,20 @@
 
 {% block content %}
 
-{% if topic.0.starter.username == request.user %}
-<a href="{% url 'boards:add-topic' request.path|remove_slash %}">
-  <button type="button" class="btn btn-info mb-3 ml-4 border-0">New Topic</button>
-</a>
-{% else %}
-<button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">New Topic</button>
-{% endif %}
+{% include 'add_topic.html' %}
+<div class="container my-3">
+  <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item">  <a href="{% url 'boards:home' %}">Boards</a></li>
+    <li class="breadcrumb-item active">{{ request.path|remove_slash  }}</li>
+  </ol>
+  {% if user.is_authenticated %}
+  <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#newtopic" >New Topic</button>
+  {% else %}
+  <button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">New Topic</button>
+  {% endif %}
 
-  <table class="table ">
+
+  <table class="table mt-4">
     <thead class="thead-inverse bg-info text-light">
       <tr>
         <th>Topic</th>
@@ -47,4 +52,5 @@
       {% endfor %}
     </tbody>
   </table>
+  </div>
 {% endblock %}

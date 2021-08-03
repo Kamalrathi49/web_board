@@ -1,4 +1,5 @@
 <!-- Modal -->
+{% load custom_tags %}
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form  action="{% url 'accounts:log-in' %}" method="post">
+                <form  action="{% url 'accounts:log-in'%}" method="post">
                     {% csrf_token %}
                     {{ login_form.as_p }}
                     <hr class="pt-1">
