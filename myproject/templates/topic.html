@@ -11,10 +11,10 @@
 {% block content %}
 
 {% include 'add_topic.html' %}
-<div class="container my-3">
-  <ol class="breadcrumb my-4">
+<div class="container">
+  <ol class="breadcrumb my-4 p-2" style="background-color: whitesmoke;">
       <li class="breadcrumb-item">  <a href="{% url 'boards:home' %}">Boards</a></li>
-    <li class="breadcrumb-item active">{{ request.path|remove_slash  }}</li>
+    <li class="breadcrumb-item active">{{ request.path|remove_slash|remove_board  }}</li>
   </ol>
   {% if user.is_authenticated %}
   <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#newtopic" >New Topic</button>

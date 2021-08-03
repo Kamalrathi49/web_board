@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="container">
-  <ol class="breadcrumb my-4">
+  <ol class="breadcrumb my-4 p-2" style="background-color: whitesmoke;" >
     <li class="breadcrumb-item"> <a href="{% url 'boards:home' %}"> Boards</a></li>
     <li class="breadcrumb-item "> <a href="{% url 'boards:topic-list' topic.board %}">{{topic.board}}</a></li>
     <li class="breadcrumb-item">Post</li>
@@ -36,7 +36,7 @@
             <small class="text-muted">{{ item.created_at }}</small>
           </div>
         </div>
-        <div class="col-6 text-center ">
+        <div class="col-6 ">
           <p>{{ item.message }}</p>
         </div>
 
