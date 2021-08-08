@@ -10,13 +10,14 @@
 
 {% block content %}
 <div class="container">
+  {% include 'reply_topic.html' %}
   <ol class="breadcrumb my-4 p-2" style="background-color: whitesmoke;" >
     <li class="breadcrumb-item"> <a class="text-decoration-none" href="{% url 'boards:home' %}"> Boards</a></li>
     <li class="breadcrumb-item "> <a class="text-decoration-none" href="{% url 'boards:topic-list' topic.board %}">{{topic.board}}</a></li>
     <li class="breadcrumb-item">Post</li>
   </ol>
 <div class="mb-4">
-  <a href="#" class="btn btn-info" role="button">Reply</a>
+  <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#replytopic">Reply</button>
 </div>
 
 {% for item in topic.post_topic.all %}
@@ -30,15 +31,17 @@
       <div class="col-10">
         <div class="row mb-3">
           <div class="col-6 ">
-            <strong class="text-muted">Created By: {{ item.created_by.username }}</strong>
+            <strong class="text-muted">By: {{ item.created_by.username }}</strong>
           </div>
           <div class="col-6 text-right">
             <small class="text-muted">{{ item.created_at }}</small>
           </div>
         </div>
+        {% if forloop.first %}
         <div class="col-6 ">
           <p>{{ item.message }}</p>
         </div>
+        {% endif %}
 
         {% if item.created_by == user %}
           <div class="mt-3">

@@ -47,7 +47,7 @@ def log_in(request):
                 messages.success(request,f'welcome back {username}')
                 return redirect(request.META.get('HTTP_REFERER'))
             else:
-                messages.error(request,f"user does't exist")
+                messages.error(request,f"username and password does not match! please try again")
                 return redirect(request.META.get('HTTP_REFERER'))
 
 
