@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^(?P<board_name>[\w\-\ ]+)/(?P<topic_subject>[\w\-\ ]+)/post/(?P<topic_pk>\d+)/$', views.post, name='topic-post'),
     # url(r'^(?P<board_name>[\w\-\ ]+)/(?P<pk>\d+)/(?P<topic_subject>[\w\-\ ]+)/post/(?P<topic_pk>\d+)/reply/$', views.reply_post, name='reply-topic'),
     url(r'^(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', views.reply_post, name='reply-topic'),
+    url(r'^topics/reply/(?P<id>\d+)/delete/$', views.delete_reply, name='delete-reply'),
 
 ]
 

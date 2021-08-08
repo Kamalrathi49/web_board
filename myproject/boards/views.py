@@ -69,7 +69,7 @@ def submit_form(request, board_name):
 def post(request, board_name,  topic_subject, topic_pk):
     topic = Topic.objects.get(pk=topic_pk)
     post_form = PostForm()
-    ctx = {'topic': topic, 'post_form':post_form, 'login_form':loginform, 'signup_form': signupform}
+    ctx = {'topic': topic,'post':post, 'post_form':post_form, 'login_form':loginform, 'signup_form': signupform}
     return render(request, 'topic_post.html', ctx )
 
 
@@ -87,3 +87,13 @@ def reply_post(request, pk, topic_pk):
         else:
             messages.error(request, f'Something went wrong! please try again!') 
             return redirect(request.META.get('HTTP_REFERER'))
+
+def delete_reply(request, id):
+    post = Post.objects.get(id=id)
+    print('<<------------------', post)
+    msg = post
+    print('---------------------->>>',msg)
+    msg.delete()
+    messages.success(request, f'Message deleted successfully!') 
+    return redirect(request.META.get('HTTP_REFERER'))
+
