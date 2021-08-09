@@ -66,10 +66,12 @@ def submit_form(request, board_name):
         messages.error(request, f'something went wrong') 
         return redirect('/')
         
-def post(request, board_name,  topic_subject, topic_pk):
+def post(request, board_name,  topic_subject, topic_pk, post_id):
     topic = Topic.objects.get(pk=topic_pk)
+    post = Post.objects.get(id=post_id)
     post_form = PostForm()
-    ctx = {'topic': topic,'post':post, 'post_form':post_form, 'login_form':loginform, 'signup_form': signupform}
+    update_post_form = PostForm(request.POST or None, instance = post)
+    ctx = {'topic': topic,'post':post, 'post_form':post_form, 'update_post_form':update_post_form , 'login_form':loginform, 'signup_form': signupform}
     return render(request, 'topic_post.html', ctx )
 
 
@@ -82,18 +84,23 @@ def reply_post(request, pk, topic_pk):
             post.topic = topic
             post.created_by = request.user
             post.save()
-            messages.success(request, f'Reply added Successfully!') 
+            messages.success(request, f'Message added successfully!') 
             return redirect(request.META.get('HTTP_REFERER'), pk=pk, topic_pk=topic_pk)
         else:
             messages.error(request, f'Something went wrong! please try again!') 
             return redirect(request.META.get('HTTP_REFERER'))
 
-def delete_reply(request, id):
-    post = Post.objects.get(id=id)
-    print('<<------------------', post)
-    msg = post
-    print('---------------------->>>',msg)
-    msg.delete()
-    messages.success(request, f'Message deleted successfully!') 
-    return redirect(request.META.get('HTTP_REFERER'))
+def update_post(request, id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=id)
+        form = PostForm(request.POST or None, instance = post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Message updated successfully!') 
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            messages.error(request, f'Something went wrong! please try again!') 
+            return redirect(request.META.get('HTTP_REFERER'))
+
+
 

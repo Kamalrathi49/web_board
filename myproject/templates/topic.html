@@ -38,7 +38,9 @@
       {% for topic in topics %}
       <tr>
         <td>
-          <a class="text-decoration-none" href="{% url 'boards:topic-post' topic.board.name topic.subject topic.pk %}">
+          <a class="text-decoration-none" {% for item in topic.post_topic.all %}
+          href="{% url 'boards:topic-post' topic.board.name topic.subject topic.pk item.id %}">
+          {% endfor %}
             {{ topic.subject }}
           </a>
 
