@@ -4,12 +4,12 @@
     <div>
     {% if  user.is_authenticated %}
     <div class="btn-group">
-      <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" data-bs-auto-close="inside" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-person-fill mb-2" viewBox="0 0 16 10">
+      <button class="btn btn-light btn-sm dropdown-toggle p-0" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" data-bs-auto-close="inside" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-person-fill mb-2 mx-1" viewBox="0 0 16 10">
           <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-        </svg>{{ request.user|upper}}
+        </svg>{{ request.user }}
       </button>
-      <ul class="dropdown-menu btn-sm text-center" aria-labelledby="dropdownMenuClickableOutside">
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end text-center" aria-labelledby="dropdownMenuClickableOutside">
         <li><a class="dropdown-item" href="#">Menu item</a></li>
         <li><a class="dropdown-item" href="#">Menu item</a></li>
         <li><a class="dropdown-item bg-secondary text-light " href="{% url 'accounts:logout' %}">Log Out</a></li>

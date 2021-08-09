@@ -30,7 +30,7 @@ def signup(request):
 def log_out(request):
     logout(request)
     messages.success(request,'You have logout sucessfully!')
-    return redirect('/')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 from django.contrib.auth import authenticate, login
 
