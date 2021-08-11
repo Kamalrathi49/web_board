@@ -2,7 +2,7 @@
 {% load static %}
 {% load custom_tags %}
 {% block title %}
-  Posts - {{ block.super }}
+  {{topic.subject}} - {{ block.super }}
 {% endblock %}
 {% block header %}
       {% include 'header.html' %}
@@ -12,20 +12,19 @@
 {% block content %}
 <div class="container">
   {% include 'reply_topic.html' %}
-  {% include 'update_post.html' %}
   <ol class="breadcrumb my-4 p-2" style="background-color: whitesmoke;" >
     <li class="breadcrumb-item"> <a class="text-decoration-none" href="{% url 'boards:home' %}"> Boards</a></li>
     <li class="breadcrumb-item "> <a class="text-decoration-none" href="{% url 'boards:topic-list' topic.board %}">{{topic.board}}</a></li>
     <li class="breadcrumb-item">{{topic.subject}}</li>
   </ol>
-<div class="mb-4">
-  {% if user.is_authenticated %}
-  <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#replytopic">Reply</button>
-  {% else %}
-  <button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">Reply</button>
-  {% endif %}
-</div>
-
+  <div class="mb-4">
+    {% if user.is_authenticated %}
+    <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#replytopic">Reply</button>
+    {% else %}
+    <button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">Reply</button>
+    {% endif %}
+  </div>
+  
 {% for item in topic.post_topic.all %}
 <div class="card mb-2 {% if forloop.first %} border border-2 border-dark {% endif %}">
   <div class="card-body ">
@@ -37,18 +36,13 @@
       <div class="col-10">
         <div class="row mb-3">
           <div class="col-6">
-            <strong class="text">By: {{ item.created_by }}</strong>
+            <strong class="text text-muted">{% if forloop.first %} Posted {% else %}Replied {% endif %}by: {{ item.created_by }}</strong>
           </div>
           <div class="col-6 text-end">
             <small class="text-muted">{{ item.created_at }}</small>
           </div>
         </div>
         {{ item.message }}
-        {% if item.created_by == user %}
-        <div class="mt-4 pt-4">
-          <a href="" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#updatepost">Edit</a>
-        </div>
-        {% endif %}
       </div>
     </div>
   </div>

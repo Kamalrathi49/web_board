@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import Truncator
 # Create your models here.
+
 class Board(models.Model):
     name = models.CharField(max_length=99, unique=True)
     description = models.CharField(max_length=200)
@@ -22,10 +23,12 @@ class Topic(models.Model):
     starter = models.ForeignKey(User, on_delete= models.CASCADE, related_name='topics')
     message = models.TextField(max_length=250)
 
-
     def __str__(self):
         return self.subject
 
+    def get_post_reply(self):
+        return Post.objects.filter(topic__subject=self).count()-1
+    
 class Post(models.Model):
     message = models.TextField(max_length=250)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='post_topic')

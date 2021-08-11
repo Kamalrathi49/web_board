@@ -42,8 +42,8 @@
 
 ## How To Run 
 - clone the project from Github.
-  -  Git clone https://github.com/Kamalrathi49/salary_box.git
-  -  cd salary_box
+  -  Git clone https://github.com/Kamalrathi49/web_board.git
+  -  cd myproject
 - Start virtual environment
   - python -m venv env
   - window

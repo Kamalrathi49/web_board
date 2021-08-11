@@ -38,17 +38,15 @@
       {% for topic in topics %}
       <tr>
         <td>
-          <a class="text-decoration-none" {% for item in topic.post_topic.all %}
-          href="{% url 'boards:topic-post' topic.board.name topic.subject topic.pk item.id %}">
-          {% endfor %}
+          <a class="text-decoration-none" 
+          href="{% url 'boards:topic-post' topic.board.name topic.subject topic.pk %}">
             {{ topic.subject }}
           </a>
-
           <small class="text-muted d-block"
             >{{ board.starter }}</small>
         </td>
         <td class="align-middle">{{ topic.starter.username }}</td>
-        <td class="align-middle">0</td>
+        <td class="align-middle">{{topic.get_post_reply}}</td>
         <td></td>
         <td>{{ topic.created_at}}</td>
       </tr>

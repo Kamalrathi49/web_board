@@ -11,6 +11,8 @@ class TopicForm(forms.ModelForm):
             super(TopicForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
             self.fields['subject'].widget.attrs['class'] = 'form-control'
             self.fields['subject'].widget.attrs['placeholder'] = 'Subject'
+            self.fields['message'].widget.attrs['placeholder'] = "What's in Your mind?"
+
 
 class PostForm(forms.ModelForm):
     class Meta:
