@@ -5,10 +5,20 @@
       
 {% block content %}
 <div class="container">
+  {% include 'add_board.html' %}
   <ol class="breadcrumb my-4 p-2" style="background-color: whitesmoke;">
     <li class="breadcrumb-item active">Boards</li>
   </ol>
-<table class="table">
+
+  {% if user.is_authenticated %}
+  <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#newboard" >New Board</button>
+  {% else %}
+  <button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">New Topic</button>
+  {% endif %}
+
+
+{% if boards %}
+<table class="table mt-4">
   <thead class="thead-inverse bg-info text-light">
     <tr>
       <th>Board</th>
@@ -50,5 +60,10 @@
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+<large class="mt-4" style="display: flex; justify-content: center; align-items: center;">
+  <em >No Boards Available.</em>
+</large> 
+{% endif %}
 </div>
 {% endblock %}

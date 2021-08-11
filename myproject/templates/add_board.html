@@ -1,0 +1,18 @@
+{% load custom_tags %}
+<div class="modal fade " id="newboard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header text-c">
+              <h5 class="modal-title" id="exampleModalLabel">Add New Board</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form action="{% url 'boards:new-board'  %}" method="POST">
+                  {% csrf_token %} {{ board_form.as_p }}
+                  <hr class="p-1">
+                  <button class="btn btn-primary" type="submit">Add Board</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

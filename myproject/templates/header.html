@@ -10,9 +10,7 @@
         </svg>{{ request.user }}
       </button>
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end text-center" aria-labelledby="dropdownMenuClickableOutside">
-        <li><a class="dropdown-item" href="#">Menu item</a></li>
-        <li><a class="dropdown-item" href="#">Menu item</a></li>
-        <li><a class="dropdown-item bg-secondary text-light " href="{% url 'accounts:logout' %}">Log Out</a></li>
+        <li><a class="dropdown-item  text-dark" href="{% url 'accounts:logout' %}">Log Out</a></li>
       </ul>
     </div>
       {% else%}
