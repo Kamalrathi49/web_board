@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+{% load humanize %}
 {% block header %}
       {% include 'header.html' %}
       {% endblock %}
@@ -45,9 +46,7 @@
         {% with post=board.get_last_post %}
   {% if post %}
     <small>
-
-        By {{ post.created_by.username }} at {{ post.created_at }}
-
+      {{ post.created_at|naturaltime }}  By <strong>{{ post.created_by.username }}</strong>
     </small>
   {% else %}
     <small class="text-muted">

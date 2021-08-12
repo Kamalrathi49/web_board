@@ -28,6 +28,7 @@ class Topic(models.Model):
 
     def get_post_reply(self):
         return Post.objects.filter(topic__subject=self).count()-1
+
     
 class Post(models.Model):
     message = models.TextField(max_length=250)

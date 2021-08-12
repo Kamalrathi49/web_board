@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load custom_tags %}
+{% load humanize %}
 {% block title %}
   {{topic.subject}} - {{ block.super }}
 {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
 {% block header %}
       {% include 'header.html' %}
 {% endblock %}
@@ -17,38 +23,44 @@
     <li class="breadcrumb-item "> <a class="text-decoration-none" href="{% url 'boards:topic-list' topic.board %}">{{topic.board}}</a></li>
     <li class="breadcrumb-item">{{topic.subject}}</li>
   </ol>
-  <div class="mb-4">
-    {% if user.is_authenticated %}
-    <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#replytopic">Reply</button>
-    {% else %}
-    <button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info mb-3 ml-4 border-0">Reply</button>
-    {% endif %}
-  </div>
+ 
   
 {% for item in topic.post_topic.all %}
-<div class="card mb-2 {% if forloop.first %} border border-2 border-dark {% endif %}">
-  <div class="card-body ">
-    <div class="row">
-      <div class="col-2">
-        <img src="{% static 'images/avatar.svg' %}" alt="{{ post.created_by.username }}" class="w-100 h-75" >
-        <small>Posts: {{ item.created_by.post.count }}</small>
+<div class="container mb-3" {% if not forloop.first %} id='reply' {% endif %} >
+      <div class="card {% if forloop.first %} border border-2 border-dark {% endif %} ">
+          <div class="comment-widgets mb-0 ">
+              <div class="d-flex flex-row comment-row m-t-0">
+                {% if forloop.first %}
+                  <div class="p-2"><img src="{% static 'images/avatar.svg' %}" alt="user" width="50" class="rounded-circle"></div>
+                  {% endif %}
+                  <div class="comment-text w-100">
+                    <div class='d-flex justify-content-between'>
+                      <h6 class="font-medium text-muted">{% if forloop.first %} Post By: {% else %}Replied By: {% endif %} {{ item.created_by }}</h6>
+                      <p class="text-muted text-end mx-2">{{ item.created_at|naturaltime }}</p>
+                    </div>
+                      <span class="m-b-15 d-block">{{ item.message }}</span>
+                      <div class="text-end">
+                      {% if item.created_by == request.user or user.is_superuser %}
+                        {% if not forloop.first %}
+                        <a href="{% url 'boards:delete-post' item.id %}" type="button" class="btn btn-danger border-0 text-decoration-none">Delete</a>
+                        {% endif %}
+                      {% endif %}
+                      {% if forloop.first %}
+                        {% if user.is_authenticated %}
+                        <button type="button" class="btn btn-info border-0" data-bs-toggle="modal" data-bs-target="#replytopic">Reply</button>
+                        {% else %}
+                        <button type="button"  data-bs-toggle="modal" data-bs-target="#login"  class="btn btn-info">Reply</button>
+                        {% endif %}
+                      {% endif %}
+                      </div>
+                  </div>
+              </div> 
+          </div> 
       </div>
-      <div class="col-10">
-        <div class="row mb-3">
-          <div class="col-6">
-            <strong class="text text-muted">{% if forloop.first %} Posted {% else %}Replied {% endif %}by: {{ item.created_by }}</strong>
-          </div>
-          <div class="col-6 text-end">
-            <small class="text-muted">{{ item.created_at }}</small>
-          </div>
-        </div>
-        {{ item.message }}
-      </div>
-    </div>
-  </div>
-</div>
-       
+ </div>
 {% endfor %}
-
 </div>
+
+
+
 {% endblock %}

@@ -91,4 +91,8 @@ def reply_post(request, pk, topic_pk):
 
 
 
-
+def delete_post(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    messages.success(request, f"Your Reply {post.message} deleted successfully!")
+    return redirect(request.META.get('HTTP_REFERER'))
