@@ -4,7 +4,7 @@ from django.utils.text import Truncator
 # Create your models here.
 
 class Board(models.Model):
-    name = models.CharField(max_length=99, unique=True)
+    name = models.CharField(max_length=15, unique=True)
     description = models.CharField(max_length=200)
     
     def __str__(self):
